@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Family = () => {
-  return <section>Family</section>;
+const Family = ({ match }) => {
+  return <section>{match.params.family}</section>;
 };
 
 export default Family;
