@@ -1,11 +1,14 @@
 import React from 'react';
+import { Home } from './Pages/pages';
+import { Header, Footer } from './Components/components';
 
 function App() {
   return (
-    <div>
-      <h1>Main Title</h1>
-      <p>Paragraph example</p>
-    </div>
+    <>
+      <Header />
+      <Home />
+      <Footer />
+    </>
   );
 }
 
