@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
-import { usePrismicRequest } from '../../Requests/prismic';
+import React from 'react';
+import { Slider } from '../../Components/components';
 import './home.scss';
 
 const Home = () => {
-  const [data, loading] = usePrismicRequest('especimen');
-
-  useEffect(() => {
-    if (!loading && data) {
-      console.log(data);
-    }
-  });
-
-  return <section className="home-container">Home</section>;
+  return (
+    <section className="home-container max-width-limit">
+      <Slider />
+    </section>
+  );
 };
 
 export default Home;

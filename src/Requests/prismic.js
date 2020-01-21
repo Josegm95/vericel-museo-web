@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Prismic from 'prismic-javascript';
 
-export const usePrismicRequest = colection => {
+export const usePrismicRequest = (predicatePath, colection) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
 
@@ -15,7 +15,7 @@ export const usePrismicRequest = colection => {
 
     const fetchData = async () => {
       const response = await Client.query(
-        Prismic.Predicates.at('document.type', colection)
+        Prismic.Predicates.at(predicatePath, colection)
       );
       if (response) {
         setData(response);
@@ -23,7 +23,7 @@ export const usePrismicRequest = colection => {
       }
     };
     fetchData();
-  }, [colection]);
+  }, [predicatePath, colection]);
 
   return [data, loading];
 };
