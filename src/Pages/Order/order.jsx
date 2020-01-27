@@ -6,10 +6,6 @@ import './order.scss';
 const Order = ({ match }) => {
   const [data, loading] = usePrismicRequest('document.tags', ['diptera']);
 
-  if (!loading && data) {
-    console.log(data.results);
-  }
-
   return (
     <section>
       {!loading && data
