@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 
 const Header = () => {
-  const [ordenes] = usePrismicRequest('document.type', 'orden');
-  const [familias] = usePrismicRequest('document.type', 'familia');
-  const [especimenes] = usePrismicRequest('document.type', 'especimen');
+  const [orders] = usePrismicRequest('document.type', 'orden');
+  const [families] = usePrismicRequest('document.type', 'familia');
+  const [specimens] = usePrismicRequest('document.type', 'especimen');
 
   return (
     <header className="header-container">
@@ -15,36 +15,34 @@ const Header = () => {
           <li className="menu__item">
             <Link to="/">Inicio</Link>
           </li>
-          {ordenes
-            ? ordenes.results.map((orden, index) => (
+          {orders
+            ? orders.results.map((order, index) => (
                 <li key={index} className="menu__item">
-                  <Link to={`/orden/${orden.slugs[0]}`}>
-                    {orden.data.nombre[0].text}
+                  <Link to={`/orden/${order.slugs[0]}`}>
+                    {order.data.nombre[0].text}
                   </Link>
                   <div className="submenu-container">
-                    {familias
-                      ? familias.results
-                          .filter(familia => familia.tags[0] === orden.slugs[0])
-                          .map((familia, index) => (
+                    {families
+                      ? families.results
+                          .filter(family => family.tags[0] === order.slugs[0])
+                          .map((family, index) => (
                             <div key={index} className="submenu">
-                              <span to="/">{familia.data.nombre[0].text}</span>
+                              <span to="/">{family.data.nombre[0].text}</span>
                               <ul>
-                                {especimenes
-                                  ? especimenes.results
-                                      .filter(especimen =>
-                                        especimen.tags.includes(
-                                          familia.slugs[0]
-                                        )
+                                {specimens
+                                  ? specimens.results
+                                      .filter(specimen =>
+                                        specimen.tags.includes(family.slugs[0])
                                       )
-                                      .map((especimen, index) => (
+                                      .map((specimen, index) => (
                                         <li
                                           key={index}
                                           className="submenu__item"
                                         >
                                           <Link
-                                            to={`/especimen/${especimen.slugs[0]}`}
+                                            to={`/especimen/${specimen.slugs[0]}`}
                                           >
-                                            {especimen.data.nombre[0].text}
+                                            {specimen.data.nombre[0].text}
                                           </Link>
                                         </li>
                                       ))
