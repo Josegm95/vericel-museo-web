@@ -1,9 +1,9 @@
 import React from 'react';
 import { usePrismicRequest } from '../../Requests/prismic';
 import { Link } from 'react-router-dom';
-import './orden.scss';
+import './order.scss';
 
-const Orden = ({ match }) => {
+const Order = ({ match }) => {
   const [data, loading] = usePrismicRequest('document.tags', ['diptera']);
 
   if (!loading && data) {
@@ -43,4 +43,4 @@ const Orden = ({ match }) => {
   );
 };
 
-export default Orden;
+export default Order;
