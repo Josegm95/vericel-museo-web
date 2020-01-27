@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Specimen = () => {
-  return <div>specimen</div>;
+const Specimen = ({ match }) => {
+  return <div>{match.params.specimen}</div>;
 };
 
 export default Specimen;

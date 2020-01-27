@@ -4,29 +4,35 @@ import { Link } from 'react-router-dom';
 import './order.scss';
 
 const Order = ({ match }) => {
-  const [data, loading] = usePrismicRequest('document.tags', ['diptera']);
+  const [data, loading] = usePrismicRequest('document.tags', [
+    match.params.order
+  ]);
+
+  if (!loading && data) {
+    console.log(match.params.order);
+  }
 
   return (
     <section>
       {!loading && data
         ? data.results
             .filter(item => item.type === 'familia')
-            .map((familia, index) => (
+            .map((family, index) => (
               <article key={index} className="family-container">
                 <figure className="family__image">
-                  <img src={familia.data.imagenurl.url} alt="" />
+                  <img src={family.data.imagenurl.url} alt="" />
                 </figure>
                 <div className="family__content">
-                  <h2>{familia.data.nombre[0].text}</h2>
-                  <p>{familia.data.descripcion[0].text}</p>
+                  <h2>{family.data.nombre[0].text}</h2>
+                  <p>{family.data.descripcion[0].text}</p>
                   <h3>Especies</h3>
                   <ul>
                     {data.results
-                      .filter(item => item.tags.includes(familia.slugs[0]))
-                      .map((especie, index) => (
+                      .filter(item => item.tags.includes(family.slugs[0]))
+                      .map((specie, index) => (
                         <li key={index}>
-                          <Link to={`/especimen/${especie.slugs[0]}`}>
-                            {especie.data.nombre[0].text}
+                          <Link to={`/especimen/${specie.slugs[0]}`}>
+                            {specie.data.nombre[0].text}
                           </Link>
                         </li>
                       ))}

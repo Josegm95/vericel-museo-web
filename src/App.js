@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Order } from './Pages/pages';
+import { Home, Order, Specimen } from './Pages/pages';
 import { Header, Footer } from './Components/components';
 import { Switch, Route } from 'react-router-dom';
 
@@ -10,8 +10,12 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route
-          path="/orden/:orden"
+          path="/orden/:order"
           render={routerProps => <Order match={routerProps.match} />}
+        />
+        <Route
+          path="/especimen/:specimen"
+          render={routerProps => <Specimen match={routerProps.match} />}
         />
       </Switch>
       <Footer />
