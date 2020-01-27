@@ -5,7 +5,7 @@ import './home.scss';
 
 const Home = () => {
   const [data, dataLoading] = usePrismicRequest('document.type', 'homepage');
-  const [ordenes, ordenesLoading] = usePrismicRequest('document.type', 'orden');
+  const [orders, ordersLoading] = usePrismicRequest('document.type', 'orden');
 
   return (
     <section className="home-container max-width-limit">
@@ -21,13 +21,13 @@ const Home = () => {
       <section className="home__orders-container">
         <h2>Principales Ordenes</h2>
         <div className="home__orders">
-          {!ordenesLoading && ordenes
-            ? ordenes.results.map((orden, index) => (
+          {!ordersLoading && orders
+            ? orders.results.map((order, index) => (
                 <article key={index} className="home__order">
-                  <img src={orden.data.imageurl.url} alt="" />
+                  <img src={order.data.imageurl.url} alt="" />
                   <div className="home__order__description">
-                    <h2>{orden.data.nombre[0].text}</h2>
-                    <p>{orden.data.descripcion[0].text}</p>
+                    <h2>{order.data.nombre[0].text}</h2>
+                    <p>{order.data.descripcion[0].text}</p>
                   </div>
                 </article>
               ))
