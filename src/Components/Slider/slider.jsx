@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { usePrismicRequest } from '../../Requests/prismic';
 import './slider.scss';
 
@@ -8,7 +8,7 @@ const Slider = () => {
     'homeslider'
   );
   const [slide, setSlide] = useState(0);
-  const [timer, setTimer] = useState(null);
+  // const [timer, setTimer] = useState(null);
   const myComponent = useRef(null);
   const slidesAmount = 4;
 
@@ -36,15 +36,15 @@ const Slider = () => {
     }
   };
 
-  useEffect(() => {
-    clearTimeout(timer);
+  // useEffect(() => {
+  //   clearTimeout(timer);
 
-    setTimer(
-      setTimeout(() => {
-        nextImg();
-      }, 5000)
-    );
-  }, [slide]);
+  //   setTimer(
+  //     setTimeout(() => {
+  //       nextImg();
+  //     }, 5000)
+  //   );
+  // }, [slide]);
 
   return (
     <div className="slider-container">

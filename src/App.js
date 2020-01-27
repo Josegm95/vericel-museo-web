@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Family } from './Pages/pages';
+import { Home, Orden } from './Pages/pages';
 import { Header, Footer } from './Components/components';
 import { Switch, Route } from 'react-router-dom';
 
@@ -10,8 +10,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route
-          path="/:family"
-          render={routerProps => <Family match={routerProps.match} />}
+          path="/orden/:orden"
+          render={routerProps => <Orden match={routerProps.match} />}
         />
       </Switch>
       <Footer />

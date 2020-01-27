@@ -1,0 +1,31 @@
+.family-container {
+  display: flex;
+  justify-content: center;
+  padding: 2em 0;
+
+  .family__image {
+    img {
+      width: 20em;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
+
+  .family__content {
+    width: 50%;
+    padding: 1em 2em;
+
+    h2,
+    h3 {
+      color: var(--primary);
+    }
+
+    p {
+      margin: 1em 0.5em;
+    }
+
+    li {
+      margin: 1em 0.5em;
+    }
+  }
+}
