@@ -6,7 +6,6 @@ const Slider = () => {
   const [slider, setSlider] = useState(null);
   const [amount, setAmount] = useState(null);
   const [slide, setSlide] = useState(0);
-  // const [timer, setTimer] = useState(null);
   const sliderContainer = useRef(null);
 
   const slideCarousel = slideNumber => {
@@ -40,15 +39,13 @@ const Slider = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   clearTimeout(timer);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextImg();
+    }, 3000);
 
-  //   setTimer(
-  //     setTimeout(() => {
-  //       nextImg();
-  //     }, 5000)
-  //   );
-  // }, [slide]);
+    return () => clearInterval(intervalId);
+  });
 
   return (
     <div className="slider-container">
