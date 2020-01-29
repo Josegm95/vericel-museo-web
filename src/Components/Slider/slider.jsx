@@ -4,14 +4,14 @@ import './slider.scss';
 
 const Slider = () => {
   const [slider, setSlider] = useState(null);
+  const [amount, setAmount] = useState(null);
   const [slide, setSlide] = useState(0);
   // const [timer, setTimer] = useState(null);
-  const myComponent = useRef(null);
-  const slidesAmount = 4;
+  const sliderContainer = useRef(null);
 
   const slideCarousel = slideNumber => {
-    const size = myComponent.current.offsetWidth;
-    myComponent.current.style.transform = `translateX(${-size *
+    const size = sliderContainer.current.offsetWidth;
+    sliderContainer.current.style.transform = `translateX(${-size *
       slideNumber}px)`;
 
     return slideNumber;
@@ -21,12 +21,12 @@ const Slider = () => {
     if (slide > 0) {
       setSlide(slideCarousel(slide - 1));
     } else {
-      setSlide(slideCarousel(slidesAmount - 1));
+      setSlide(slideCarousel(amount - 1));
     }
   };
 
   const nextImg = () => {
-    if (slide < slidesAmount - 1) {
+    if (slide < amount - 1) {
       setSlide(slideCarousel(slide + 1));
     } else {
       setSlide(slideCarousel(0));
@@ -36,6 +36,7 @@ const Slider = () => {
   useEffect(() => {
     prismicRequest('my.slider.uid', 'homeslider', data => {
       setSlider(data);
+      setAmount(data.results[0].data.imagenesurl.length);
     });
   }, []);
 
@@ -59,7 +60,7 @@ const Slider = () => {
       >
         <i className="fas fa-chevron-left " />
       </button>
-      <div ref={myComponent} className="slider__images-container">
+      <div ref={sliderContainer} className="slider__images-container">
         {slider
           ? slider.results[0].data.imagenesurl.map((imageUrl, index) => (
               <img src={imageUrl.text} alt="" key={index} />
