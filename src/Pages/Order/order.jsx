@@ -1,20 +1,25 @@
-import React from 'react';
-import { usePrismicRequest } from '../../Requests/prismic';
+import React, { useState, useEffect } from 'react';
+import { prismicRequest } from '../../Requests/prismic';
 import { Link } from 'react-router-dom';
 import './order.scss';
 
-const Order = ({ match }) => {
-  const [data, loading] = usePrismicRequest('document.tags', [
-    match.params.order
-  ]);
-
-  if (!loading && data) {
-    console.log(match.params.order);
+const Order = ({
+  match: {
+    params: { order }
   }
+}) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    prismicRequest('document.tags', [order], data => {
+      setData(data);
+    });
+  }, [order]);
 
   return (
     <section>
-      {!loading && data
+      <h2>{order}</h2>
+      {data
         ? data.results
             .filter(item => item.type === 'familia')
             .map((family, index) => (

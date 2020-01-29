@@ -8,15 +8,9 @@ function App() {
     <>
       <Header />
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route
-          path="/orden/:order"
-          render={routerProps => <Order match={routerProps.match} />}
-        />
-        <Route
-          path="/especimen/:specimen"
-          render={routerProps => <Specimen match={routerProps.match} />}
-        />
+        <Route path="/" component={Home} exact />
+        <Route path="/orden/:order" component={Order} />
+        <Route path="/especimen/:specimen" component={Specimen} />
       </Switch>
       <Footer />
     </>

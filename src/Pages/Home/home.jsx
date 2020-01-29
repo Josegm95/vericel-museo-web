@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Slider } from '../../Components/components';
-import { usePrismicRequest } from '../../Requests/prismic';
+import { prismicRequest } from '../../Requests/prismic';
 import { Link } from 'react-router-dom';
 import './home.scss';
 
 const Home = () => {
-  const [data, dataLoading] = usePrismicRequest('document.type', 'homepage');
-  const [orders, ordersLoading] = usePrismicRequest('document.type', 'orden');
+  const [data, setData] = useState(null);
+  const [orders, setOrders] = useState(null);
+
+  useEffect(() => {
+    prismicRequest('document.type', 'homepage', data => {
+      setData(data);
+    });
+    prismicRequest('document.type', 'orden', data => {
+      setOrders(data);
+    });
+  }, []);
 
   return (
     <section className="home-container max-width-limit">
       <Slider />
       <section className="home__description">
-        {!dataLoading && data ? (
+        {data ? (
           <>
             <h1>{data.results[0].data.titulo[0].text}</h1>
             <p>{data.results[0].data.parrafo[0].text}</p>
@@ -22,7 +31,7 @@ const Home = () => {
       <section className="home__orders-container">
         <h2>Principales Ordenes</h2>
         <div className="home__orders">
-          {!ordersLoading && orders
+          {orders
             ? orders.results.map((order, index) => (
                 <Link key={index} to={`/orden/${order.slugs[0]}`}>
                   <article className="home__order">

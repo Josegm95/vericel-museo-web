@@ -1,12 +1,24 @@
-import React from 'react';
-import { usePrismicRequest } from '../../Requests/prismic';
+import React, { useState, useEffect } from 'react';
+import { prismicRequest } from '../../Requests/prismic';
 import { Link } from 'react-router-dom';
 import './header.scss';
 
 const Header = () => {
-  const [orders] = usePrismicRequest('document.type', 'orden');
-  const [families] = usePrismicRequest('document.type', 'familia');
-  const [specimens] = usePrismicRequest('document.type', 'especimen');
+  const [orders, setOrders] = useState(null);
+  const [families, setFamilies] = useState(null);
+  const [specimens, setSpecimens] = useState(null);
+
+  useEffect(() => {
+    prismicRequest('document.type', 'orden', data => {
+      setOrders(data);
+    });
+    prismicRequest('document.type', 'familia', data => {
+      setFamilies(data);
+    });
+    prismicRequest('document.type', 'especimen', data => {
+      setSpecimens(data);
+    });
+  }, []);
 
   return (
     <header className="header-container">

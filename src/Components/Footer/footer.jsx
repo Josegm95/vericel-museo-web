@@ -1,13 +1,19 @@
-import React from 'react';
-import { usePrismicRequest } from '../../Requests/prismic';
+import React, { useState, useEffect } from 'react';
+import { prismicRequest } from '../../Requests/prismic';
 import './footer.scss';
 
 const Footer = () => {
-  const [data, loading] = usePrismicRequest('document.type', 'footer');
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    prismicRequest('document.type', 'footer', data => {
+      setData(data);
+    });
+  }, []);
 
   return (
     <section className="footer-container">
-      {!loading && data ? (
+      {data ? (
         <>
           <h2>{data.results[0].data.titulo[0].text}</h2>
           <div className="footer__content">

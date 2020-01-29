@@ -1,12 +1,9 @@
-import React, { useRef, useState } from 'react';
-import { usePrismicRequest } from '../../Requests/prismic';
+import React, { useRef, useState, useEffect } from 'react';
+import { prismicRequest } from '../../Requests/prismic';
 import './slider.scss';
 
 const Slider = () => {
-  const [slider, sliderLoading] = usePrismicRequest(
-    'my.slider.uid',
-    'homeslider'
-  );
+  const [slider, setSlider] = useState(null);
   const [slide, setSlide] = useState(0);
   // const [timer, setTimer] = useState(null);
   const myComponent = useRef(null);
@@ -36,6 +33,12 @@ const Slider = () => {
     }
   };
 
+  useEffect(() => {
+    prismicRequest('my.slider.uid', 'homeslider', data => {
+      setSlider(data);
+    });
+  }, []);
+
   // useEffect(() => {
   //   clearTimeout(timer);
 
@@ -57,7 +60,7 @@ const Slider = () => {
         <i className="fas fa-chevron-left " />
       </button>
       <div ref={myComponent} className="slider__images-container">
-        {!sliderLoading && slider
+        {slider
           ? slider.results[0].data.imagenesurl.map((imageUrl, index) => (
               <img src={imageUrl.text} alt="" key={index} />
             ))
@@ -72,7 +75,7 @@ const Slider = () => {
         <i className="fas fa-chevron-right " />
       </button>
       <div className="slider__dots-container">
-        {!sliderLoading && slider
+        {slider
           ? slider.results[0].data.imagenesurl.map((item, index) => (
               <span
                 key={index}
