@@ -18,7 +18,6 @@ const Order = ({
 
   return (
     <section>
-      <h2>{order}</h2>
       {data
         ? data.results
             .filter(item => item.type === 'familia')
