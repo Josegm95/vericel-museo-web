@@ -1,0 +1,124 @@
+.specimen-container {
+  color: var(--black-light);
+
+  h2,
+  h3,
+  h4 {
+    color: var(--primary);
+    margin-bottom: 1em;
+    font-size: 1.4em;
+  }
+}
+
+.specimen__img {
+  width: 100%;
+  background-color: var(--black);
+
+  img {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: auto;
+  }
+}
+
+.section-container {
+  padding: 2em 5em;
+
+  &--gray {
+    background-color: var(--gray-light);
+  }
+}
+
+.specimen__description {
+  ul {
+    max-height: 200px;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    li {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+.specimen__bionomy {
+  p {
+    margin: 1em 2em;
+    text-align: justify;
+    line-height: 1.4em;
+  }
+}
+
+.specimen__location {
+  figure {
+    img {
+      display: block;
+      width: 50%;
+      height: auto;
+      margin: 1em auto;
+    }
+  }
+
+  ol {
+    max-height: 200px;
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    li {
+      margin-bottom: 0.4em;
+    }
+  }
+}
+
+.specimen__importance {
+  display: flex;
+  justify-content: space-around;
+
+  .separator {
+    width: 1px;
+    height: inherit;
+    background-color: var(--primary);
+  }
+
+  .specimen__importance__item {
+    p {
+      margin: 1em 0;
+    }
+
+    li {
+      margin: 0.4em;
+    }
+  }
+}
+
+.specimen__taxonomy {
+  .specimen__taxonomy__item {
+    display: flex;
+    margin: 3em;
+
+    img {
+      width: 40%;
+      height: auto;
+      border-radius: 5px;
+      box-shadow: 0 0 5px 2px var(--primary);
+    }
+
+    .specimen__taxonomy__claves {
+      overflow-y: scroll;
+      width: 50%;
+      margin: 1em 3em;
+    }
+  }
+}
+
+.specimen__references {
+  .specimen__references__item {
+    margin: 1em 0.5em;
+  }
+}
