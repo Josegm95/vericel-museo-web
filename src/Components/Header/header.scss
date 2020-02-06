@@ -29,11 +29,11 @@
     }
 
     &:hover {
-      border-color: var(--black2);
+      border-color: var(--black-light);
     }
 
     &:hover > a {
-      color: var(--black2);
+      color: var(--black-light);
     }
 
     &:hover > .submenu-container {
@@ -57,7 +57,7 @@
     span {
       display: inline-block;
       font-size: 1.3em;
-      color: var(--black2);
+      color: var(--black-light);
       font-weight: bold;
     }
   }
@@ -66,7 +66,7 @@
     margin: 0.3em 0;
 
     a:hover {
-      color: var(--black2);
+      color: var(--black-light);
     }
   }
 }
