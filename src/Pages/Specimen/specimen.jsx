@@ -12,7 +12,6 @@ const Specimen = ({
   useEffect(() => {
     prismicRequest('my.especimen.uid', specimen, data => {
       if (data.total_results_size > 0) {
-        console.log(data.results[0].data);
         setData(data.results[0].data);
       }
     });
