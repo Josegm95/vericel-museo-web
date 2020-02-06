@@ -106,11 +106,11 @@
       width: 40%;
       height: auto;
       border-radius: 5px;
-      box-shadow: 0 0 5px 2px var(--primary);
+      box-shadow: 0 0 5px 3px var(--primary);
     }
 
     .specimen__taxonomy__claves {
-      overflow-y: scroll;
+      overflow-y: auto;
       width: 50%;
       margin: 1em 3em;
     }
