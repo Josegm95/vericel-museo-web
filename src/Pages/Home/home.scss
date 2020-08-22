@@ -1,8 +1,14 @@
+@import '../../Styles/Mixins/mixins';
+
 .home-container {
   .home__description {
     padding: 3em 10em;
     background-color: var(--gray-light);
     color: var(--black-light);
+
+    @include to-mobile {
+      padding: 2em 1em;
+    }
 
     h1 {
       margin-bottom: 1em;
