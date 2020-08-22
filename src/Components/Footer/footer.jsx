@@ -6,14 +6,14 @@ const Footer = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    prismicRequest('document.type', 'footer', data => {
+    prismicRequest('document.type', 'footer', (data) => {
       setData(data);
     });
   }, []);
 
   return (
-    <section className="footer-container">
-      {data ? (
+    data && (
+      <section className="footer-container">
         <>
           <h2>{data.results[0].data.titulo[0].text}</h2>
           <div className="footer__content">
@@ -22,8 +22,8 @@ const Footer = () => {
             })}
           </div>
         </>
-      ) : null}
-    </section>
+      </section>
+    )
   );
 };
 

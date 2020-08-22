@@ -1,3 +1,5 @@
+@import '../../Styles/Mixins/mixins';
+
 .specimen-container {
   color: var(--black-light);
 
@@ -12,18 +14,35 @@
 
 .specimen__img {
   width: 100%;
+  height: 70vh;
   background-color: var(--black);
 
+  @include to-mobile {
+    height: 300px;
+  }
+
   img {
+    object-fit: cover;
+    object-position: top;
     display: block;
     margin: auto;
-    width: 50%;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    padding: 0 25%;
+
+    @include to-mobile {
+      width: 100%;
+      padding: 0 2em;
+    }
   }
 }
 
 .section-container {
   padding: 2em 5em;
+
+  @include to-mobile {
+    padding: 2em 1em;
+  }
 
   &--gray {
     background-color: var(--gray-light);
@@ -32,14 +51,32 @@
 
 .specimen__description {
   ul {
-    max-height: 200px;
-    margin: 1em;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     flex-wrap: wrap;
+    margin: 1em;
 
     li {
-      margin-bottom: 0.5em;
+      position: relative;
+      width: 15em;
+      margin: 0.5em 0;
+      margin-left: 1em;
+
+      @include to-mobile {
+        width: 100%;
+      }
+
+      &::before {
+        display: inline-block;
+        position: absolute;
+        top: 8px;
+        left: -10px;
+        content: '';
+        width: 5px;
+        height: 5px;
+        background-color: var(--primary);
+        border-radius: 50%;
+      }
     }
   }
 }
@@ -49,6 +86,10 @@
     margin: 1em 2em;
     text-align: justify;
     line-height: 1.4em;
+
+    @include to-mobile {
+      margin: 1em 0.5em;
+    }
   }
 }
 
@@ -59,19 +100,26 @@
       width: 50%;
       height: auto;
       margin: 1em auto;
+
+      @include to-mobile {
+        width: 100%;
+      }
     }
   }
 
   ol {
-    max-height: 200px;
     margin: 0 20px;
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
     flex-wrap: wrap;
 
     li {
-      margin-bottom: 0.4em;
+      width: 12em;
+      margin: 0.5em 0 0.5em 2em;
+
+      @include to-mobile {
+        width: 100%;
+      }
     }
   }
 }
@@ -80,6 +128,10 @@
   display: flex;
   justify-content: space-around;
 
+  @include to-mobile {
+    flex-direction: column;
+  }
+
   .separator {
     width: 1px;
     height: inherit;
@@ -87,6 +139,12 @@
   }
 
   .specimen__importance__item {
+    margin: 1em 0;
+
+    @include to-mobile {
+      padding-left: 2em;
+    }
+
     p {
       margin: 1em 0;
     }
@@ -100,10 +158,17 @@
 .specimen__taxonomy {
   .specimen__taxonomy__item {
     display: flex;
-    margin: 3em;
+    justify-content: center;
+    padding: 3em 0;
+    border-bottom: 1px solid var(--primary-opacity);
+
+    @include to-mobile {
+      flex-direction: column;
+      align-items: center;
+    }
 
     img {
-      width: 40%;
+      width: 20em;
       height: auto;
       border-radius: 5px;
       box-shadow: 0 0 5px 3px var(--primary);
@@ -111,8 +176,13 @@
 
     .specimen__taxonomy__claves {
       overflow-y: auto;
-      width: 50%;
-      margin: 1em 3em;
+      width: 30em;
+      padding: 1em 3em;
+
+      @include to-mobile {
+        width: 100%;
+        padding: 1em;
+      }
     }
   }
 }
