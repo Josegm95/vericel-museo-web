@@ -146,6 +146,7 @@
     }
 
     p {
+      font-weight: bold;
       margin: 1em 0;
     }
 
@@ -176,8 +177,8 @@
 
     .specimen__taxonomy__claves {
       overflow-y: auto;
-      width: 30em;
-      padding: 1em 3em;
+      width: 38em;
+      padding: 1em 0 1em 3em;
 
       @include to-mobile {
         width: 100%;
