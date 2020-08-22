@@ -1,0 +1,13 @@
+/// @access public
+@mixin to-mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+/// @access public
+@mixin to-tablet {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}

@@ -1,75 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import { prismicRequest } from '../../Requests/prismic';
+import React, { useState, useContext } from 'react';
+import { SiteContext } from '../../Context/siteContext';
 import { Link } from 'react-router-dom';
 import './header.scss';
 
 const Header = () => {
-  const [orders, setOrders] = useState(null);
-  const [families, setFamilies] = useState(null);
-  const [specimens, setSpecimens] = useState(null);
-
-  useEffect(() => {
-    prismicRequest('document.type', 'orden', data => {
-      setOrders(data);
-    });
-    prismicRequest('document.type', 'familia', data => {
-      setFamilies(data);
-    });
-    prismicRequest('document.type', 'especimen', data => {
-      setSpecimens(data);
-    });
-  }, []);
+  const { orders, families, specimens } = useContext(SiteContext);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <header className="header-container">
       <nav>
-        <ul className="menu-container">
-          <li className="menu__item">
-            <Link to="/">Inicio</Link>
-          </li>
+        <i
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+          className="header-container__icon fas fa-bars"
+        ></i>
+        <ul
+          className={`menu-container ${showMenu ? 'menu-container--show' : ''}`}
+        >
+          <Link
+            to="/"
+            className="menu__item"
+            onClick={() => setShowMenu(false)}
+          >
+            <li>Inicio</li>
+          </Link>
           {orders
-            ? orders.results.map((order, index) => (
-                <li key={index} className="menu__item">
-                  <Link to={`/orden/${order.slugs[0]}`}>
+            ? orders.map((order, index) => (
+                <Link
+                  key={index}
+                  className="menu__item"
+                  onClick={() => setShowMenu(false)}
+                  to={`/orden/${order.slugs[0]}`}
+                >
+                  <li>
                     {order.data.nombre[0].text}
-                  </Link>
-                  <div className="submenu-container">
-                    {families
-                      ? families.results
-                          .filter(family => family.tags[0] === order.slugs[0])
-                          .map((family, index) => (
-                            <div key={index} className="submenu">
-                              <span to="/">{family.data.nombre[0].text}</span>
-                              <ul>
-                                {specimens
-                                  ? specimens.results
-                                      .filter(specimen =>
-                                        specimen.tags.includes(family.slugs[0])
-                                      )
-                                      .map((specimen, index) => (
-                                        <li
-                                          key={index}
-                                          className="submenu__item"
-                                        >
+                    <div className="submenu-container">
+                      {families
+                        ? families
+                            .filter(
+                              (family) => family.tags[0] === order.slugs[0]
+                            )
+                            .map((family, index) => (
+                              <div key={index} className="submenu">
+                                <span to="/">{family.data.nombre[0].text}</span>
+                                <ul>
+                                  {specimens
+                                    ? specimens
+                                        .filter((specimen) =>
+                                          specimen.tags.includes(
+                                            family.slugs[0]
+                                          )
+                                        )
+                                        .map((specimen, index) => (
                                           <Link
+                                            key={index}
                                             to={`/especimen/${specimen.slugs[0]}`}
+                                            className="submenu__item"
                                           >
-                                            {specimen.data.nombre[0].text}
+                                            <li>
+                                              {specimen.data.nombre[0].text}
+                                            </li>
                                           </Link>
-                                        </li>
-                                      ))
-                                  : null}
-                              </ul>
-                            </div>
-                          ))
-                      : null}
-                  </div>
-                </li>
+                                        ))
+                                    : null}
+                                </ul>
+                              </div>
+                            ))
+                        : null}
+                    </div>
+                  </li>
+                </Link>
               ))
             : null}
-          <li className="menu__item">
-            <Link to="/nosotros">Nosotros</Link>
-          </li>
+          <Link className="menu__item" to="/nosotros">
+            <li>Nosotros</li>
+          </Link>
         </ul>
       </nav>
     </header>
