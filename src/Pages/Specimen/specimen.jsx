@@ -4,13 +4,13 @@ import './specimen.scss';
 
 const Specimen = ({
   match: {
-    params: { specimen }
-  }
+    params: { specimen },
+  },
 }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    prismicRequest('my.especimen.uid', specimen, data => {
+    prismicRequest('my.especimen.uid', specimen, (data) => {
       if (data.total_results_size > 0) {
         setData(data.results[0].data);
       }
@@ -97,6 +97,16 @@ const Specimen = ({
             ))}
           </section>
           <section className="specimen__references section-container section-container--gray">
+            <h3>Autorías</h3>
+            <ul>
+              {data.autorias.map((item, index) => (
+                <li key={index} className="specimen__references__item">
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="specimen__references section-container">
             <h3>Referencias</h3>
             <ul>
               {data.referencias.map((item, index) => (

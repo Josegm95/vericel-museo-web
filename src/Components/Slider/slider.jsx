@@ -1,17 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { prismicRequest } from '../../Requests/prismic';
 import './slider.scss';
 
-const Slider = () => {
-  const [slider, setSlider] = useState(null);
-  const [amount, setAmount] = useState(null);
+const Slider = ({ slider }) => {
   const [slide, setSlide] = useState(0);
   const sliderContainer = useRef(null);
 
-  const slideCarousel = slideNumber => {
+  const slideCarousel = (slideNumber) => {
     const size = sliderContainer.current.offsetWidth;
-    sliderContainer.current.style.transform = `translateX(${-size *
-      slideNumber}px)`;
+    sliderContainer.current.style.transform = `translateX(${
+      -size * slideNumber
+    }px)`;
 
     return slideNumber;
   };
@@ -20,24 +18,17 @@ const Slider = () => {
     if (slide > 0) {
       setSlide(slideCarousel(slide - 1));
     } else {
-      setSlide(slideCarousel(amount - 1));
+      setSlide(slideCarousel(slider.length - 1));
     }
   };
 
   const nextImg = () => {
-    if (slide < amount - 1) {
+    if (slide < slider.length - 1) {
       setSlide(slideCarousel(slide + 1));
     } else {
       setSlide(slideCarousel(0));
     }
   };
-
-  useEffect(() => {
-    prismicRequest('my.slider.uid', 'homeslider', data => {
-      setSlider(data);
-      setAmount(data.results[0].data.imagenesurl.length);
-    });
-  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -59,7 +50,7 @@ const Slider = () => {
       </button>
       <div ref={sliderContainer} className="slider__images-container">
         {slider
-          ? slider.results[0].data.imagenesurl.map((imageUrl, index) => (
+          ? slider.map((imageUrl, index) => (
               <img src={imageUrl.text} alt="" key={index} />
             ))
           : null}
@@ -74,7 +65,7 @@ const Slider = () => {
       </button>
       <div className="slider__dots-container">
         {slider
-          ? slider.results[0].data.imagenesurl.map((item, index) => (
+          ? slider.map((item, index) => (
               <span
                 key={index}
                 className={`slider__dot ${

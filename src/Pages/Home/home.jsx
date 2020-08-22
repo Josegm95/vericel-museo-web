@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Slider } from '../../Components/components';
-import { prismicRequest } from '../../Requests/prismic';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { prismicRequest } from '../../Requests/prismic';
+import { SiteContext } from '../../Context/siteContext';
+import { Slider } from '../../Components/components';
 import './home.scss';
 
 const Home = () => {
-  const [data, setData] = useState(null);
-  const [orders, setOrders] = useState(null);
+  const { orders } = useContext(SiteContext);
+  const [home, setHome] = useState(null);
 
   useEffect(() => {
-    prismicRequest('document.type', 'homepage', data => {
-      setData(data);
-    });
-    prismicRequest('document.type', 'orden', data => {
-      setOrders(data);
+    prismicRequest('document.type', 'homepage', (data) => {
+      setHome(data.results[0].data);
     });
   }, []);
 
   return (
     <section className="home-container max-width-limit">
-      <Slider />
+      {home && home.slider && <Slider slider={home.slider} />}
       <section className="home__description">
-        {data ? (
+        {home && (
           <>
-            <h1>{data.results[0].data.titulo[0].text}</h1>
-            <p>{data.results[0].data.parrafo[0].text}</p>
+            <h1>{home.titulo[0].text}</h1>
+            <p>{home.parrafo[0].text}</p>
           </>
-        ) : null}
+        )}
       </section>
       <section className="home__orders-container">
         <h2>Principales Ordenes</h2>
         <div className="home__orders">
           {orders
-            ? orders.results.map((order, index) => (
+            ? orders.map((order, index) => (
                 <Link key={index} to={`/orden/${order.slugs[0]}`}>
                   <article className="home__order">
                     <img src={order.data.imageurl.url} alt="" />
