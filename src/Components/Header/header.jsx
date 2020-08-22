@@ -14,8 +14,10 @@ const Header = () => {
           onClick={() => {
             setShowMenu(!showMenu);
           }}
-          className="header-container__icon fas fa-bars"
-        ></i>
+          className={`header-container__icon fas ${
+            showMenu ? 'fa-times' : 'fa-bars'
+          } `}
+        />
         <ul
           className={`menu-container ${showMenu ? 'menu-container--show' : ''}`}
         >
