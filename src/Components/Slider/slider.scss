@@ -1,8 +1,15 @@
+@import '../../Styles/Mixins/mixins';
+
 .slider-container {
   position: relative;
   width: 100%;
+  height: 70vh;
   background-color: var(--black);
   overflow: hidden;
+
+  @include to-mobile {
+    height: 400px;
+  }
 
   button {
     display: flex;
@@ -69,11 +76,19 @@
 }
 
 .slider__images-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   transition: 1s ease-in-out;
 
   img {
     width: 100%;
-    padding: 0 25vw;
+    height: 100%;
+    object-fit: cover;
+    padding: 0 10vw;
+
+    @include to-mobile {
+      padding: 0.5em;
+    }
   }
 }
