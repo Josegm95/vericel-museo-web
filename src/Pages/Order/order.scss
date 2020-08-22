@@ -1,7 +1,14 @@
+@import '../../Styles/Mixins/mixins';
+
 .family-container {
   display: flex;
   justify-content: center;
   padding: 2em 0;
+
+  @include to-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
 
   .family__image {
     img {
@@ -15,6 +22,11 @@
   .family__content {
     width: 50%;
     padding: 1em 2em;
+
+    @include to-mobile {
+      width: 100%;
+      padding: 1.5em;
+    }
 
     h2,
     h3 {
